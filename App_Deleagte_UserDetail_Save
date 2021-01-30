@@ -1,0 +1,25 @@
+// variable decration
+ var dicLoginUserDetails = NSDictionary()
+
+// appdelegate did finished launching method 
+ if UserDefaults.standard.object(forKey: "LoginUserDetails") != nil {
+            
+            self.dicLoginUserDetails = (UserDefaults.standard.object(forKey: "LoginUserDetails") as? NSDictionary)!
+        }
+        
+// loginVC Code api
+
+  let data = response?.value(forKey: "data") as? String
+  let status = response?.value(forKey: "status") as? String
+  
+                if status != "error" {
+                    appDelagte.setUpSideMenu()
+                    
+                    let dicData = response?.value(forKey: "data") as? NSDictionary
+                    
+                    appDelagte.dicLoginUserDetails = dicData!
+                    
+                    UserDefaults.standard.setValue(dicData, forKey: "LoginUserDetails")
+                    UserDefaults.standard.synchronize()
+                    
+                }
